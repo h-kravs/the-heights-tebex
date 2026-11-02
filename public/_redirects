@@ -1,0 +1,4 @@
+# SPA fallback. netlify.toml sets this too; kept here so the rule survives even
+# if the site is ever deployed without reading the config (drag-and-drop deploy).
+/api/server-stats  /.netlify/functions/server-stats  200
+/*                 /index.html                       200

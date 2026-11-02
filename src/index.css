@@ -1,0 +1,367 @@
+@import "tailwindcss";
+
+/* ════════════════════════════════════════════════════════════════════
+   The Heights LA: design tokens
+
+   Everything comes from the logo: neon magenta light, chrome, the halftone
+   mesh of the cap, and paint that drips. Black is the canvas, white is the
+   voice, pink is the signal. Pink is rationed: one saturated pink per view
+   does the talking, chrome and white do the rest.
+
+   Type: one family, Archivo, on two axes. Squeezed and black for display,
+   squeezed and bold for labels, regular width for reading (Instrument Sans).
+   ════════════════════════════════════════════════════════════════════ */
+@theme {
+  --font-display: "Archivo", "Arial Narrow", Impact, sans-serif;
+  --font-label: "Archivo", "Arial Narrow", Impact, sans-serif;
+  --font-sans: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+
+  /* Void: black pushed a touch violet so the pink glows instead of bleeds */
+  --color-void: #06030a;
+  --color-ink-950: #0a0510;
+  --color-ink-900: #0f0816;
+  --color-ink-850: #150b1d;
+  --color-ink-800: #1b0f25;
+  --color-ink-700: #261634;
+  --color-ink-600: #352047;
+
+  /* Chalk: the white of the lettering */
+  --color-chalk: #f8f3f9;
+  --color-mist-100: #ece4ee;
+  --color-mist-200: #cfc3d4;
+  --color-mist-300: #a899b0;
+  --color-mist-400: #83748c;
+  --color-mist-500: #5f5267;
+
+  /* Neon magenta, sampled from the logo outline */
+  --color-pink-100: #ffd6ee;
+  --color-pink-200: #ffa9dc;
+  --color-pink-300: #ff7acb;
+  --color-pink-400: #ff47b6;
+  --color-pink-500: #ff14a0;
+  --color-pink-600: #d50a82;
+  --color-pink-700: #a00862;
+  --color-pink-800: #640540;
+  --color-pink-900: #330221;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-marquee: thl-marquee 32s linear infinite;
+  --animate-spin-slow: spin 16s linear infinite;
+  --animate-flicker: thl-flicker 4s linear infinite;
+}
+
+@utility container-x {
+  @apply mx-auto w-full max-w-[1400px] px-5 sm:px-8 lg:px-12;
+}
+
+/*
+ * Buttons: skewed slabs, like a sticker slapped on at an angle. The slab is a
+ * pseudo-element so the label stays upright on top of it. A hard offset
+ * shadow (no blur) gives the sticker its paper edge; on hover the slab
+ * slides onto its shadow.
+ */
+@utility btn {
+  @apply relative isolate inline-flex cursor-pointer items-center justify-center gap-2.5 px-7 py-3.5
+         font-display text-[0.8rem] font-black whitespace-nowrap uppercase tracking-[0.06em]
+         transition-colors duration-200 select-none
+         disabled:cursor-not-allowed disabled:opacity-60;
+  font-stretch: 80%;
+}
+
+@utility panel {
+  @apply border border-white/[0.07] bg-ink-900/70 backdrop-blur-xl;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--color-void);
+    color: var(--color-mist-200);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-stretch: 72%;
+    font-weight: 800;
+    color: var(--color-chalk);
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background: var(--color-pink-500);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-pink-400);
+    outline-offset: 3px;
+  }
+
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: var(--color-void); }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-ink-600);
+    border-radius: 999px;
+    border: 2px solid var(--color-void);
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-pink-700); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Lenis smooth scroll */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+@layer components {
+  .font-display { font-stretch: 72%; }
+  .font-poster { font-stretch: 64%; }
+  /* Labels: the same condensed face, bold, never thin. */
+  .font-label { font-stretch: 82%; font-weight: 700; }
+
+  /* Section opener: a pink slab with the label knocked out of it, text upright */
+  .eyebrow, .eyebrow-ghost {
+    @apply relative isolate inline-flex items-center gap-2 px-3 py-1 font-label text-[0.72rem] uppercase tracking-[0.12em];
+  }
+  .eyebrow { @apply text-void; }
+  .eyebrow-ghost { @apply text-chalk; }
+  .eyebrow::before, .eyebrow-ghost::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    transform: skewX(-10deg);
+  }
+  .eyebrow::before { background: var(--color-pink-500); }
+  .eyebrow-ghost::before { border: 1px solid currentColor; opacity: 0.6; }
+
+  .btn-primary, .btn-chrome, .btn-ghost, .btn-discord { @apply btn; }
+  .btn-primary::before, .btn-chrome::before, .btn-ghost::before, .btn-discord::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    transform: skewX(-10deg);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  }
+
+  /* Primary: neon pink slab, white sticker edge */
+  .btn-primary { @apply text-white; }
+  .btn-primary::before { background: var(--color-pink-500); box-shadow: 5px 5px 0 0 var(--color-chalk); }
+  .btn-primary:hover:not(:disabled)::before { background: var(--color-pink-400); transform: skewX(-10deg) translate(3px, 3px); box-shadow: 2px 2px 0 0 var(--color-chalk); }
+  .btn-primary:active:not(:disabled)::before { transform: skewX(-10deg) translate(5px, 5px); box-shadow: none; }
+
+  /* Chrome: the logo's metal, for the single most important action per view */
+  .btn-chrome { @apply text-ink-950; }
+  .btn-chrome::before {
+    background: linear-gradient(180deg, #ffffff 0%, #f3f3f7 45%, #d9d9e2 100%);
+    box-shadow: 5px 5px 0 0 var(--color-pink-500);
+  }
+  .btn-chrome:hover:not(:disabled)::before { transform: skewX(-10deg) translate(3px, 3px); box-shadow: 2px 2px 0 0 var(--color-pink-500); }
+  .btn-chrome:active:not(:disabled)::before { transform: skewX(-10deg) translate(5px, 5px); box-shadow: none; }
+
+  /* Ghost: just the outline, fills on hover */
+  .btn-ghost { @apply text-chalk; }
+  .btn-ghost::before { border: 2px solid rgb(255 255 255 / 0.25); background: transparent; }
+  .btn-ghost:hover:not(:disabled) { @apply text-white; }
+  .btn-ghost:hover:not(:disabled)::before { border-color: var(--color-pink-500); background: rgb(255 20 160 / 0.1); box-shadow: 4px 4px 0 0 var(--color-pink-500); transform: skewX(-10deg) translate(-1px, -1px); }
+
+  .btn-discord { @apply text-white; }
+  .btn-discord::before { background: #5865F2; box-shadow: 5px 5px 0 0 var(--color-chalk); }
+  .btn-discord:hover:not(:disabled)::before { background: #6b77f5; transform: skewX(-10deg) translate(3px, 3px); box-shadow: 2px 2px 0 0 var(--color-chalk); }
+
+  /* Hairline with a pink core, used as a section divider */
+  .rule-pink {
+    @apply h-px w-full;
+    background: linear-gradient(90deg, transparent, rgb(255 20 160 / 0.7), transparent);
+  }
+
+  /* Outlined display text for marquees and big numbers */
+  .text-outline {
+    color: transparent;
+    -webkit-text-stroke: 1px rgb(248 243 249 / 0.22);
+  }
+  .text-outline-pink {
+    color: transparent;
+    -webkit-text-stroke: 1px rgb(255 20 160 / 0.55);
+  }
+
+  /* Chrome lettering: the logo's dreads, as a text fill */
+  .text-chrome {
+    background: linear-gradient(180deg, #ffffff 0%, #f1f1f5 30%, #a7a7b6 48%, #fbfbfd 56%, #c9c9d5 78%, #8f8f9e 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /*
+   * Neon lettering. The tube is the pink stroke around the white letter, like
+   * the logo outline; the light is a soft, wide bloom. Kept to two layers so
+   * it reads as light, not as a drop shadow.
+   */
+  .text-neon {
+    color: #fff;
+    -webkit-text-stroke: 0.012em rgb(255 20 160 / 0.9);
+    paint-order: stroke fill;
+    text-shadow:
+      0 0 0.12em rgb(255 71 182 / 0.8),
+      0 0 0.6em rgb(255 20 160 / 0.5);
+  }
+  /* Room for the bloom inside a clipping line wrapper */
+  .neon-room { padding: 0.25em 0.5em 0.3em; margin: -0.25em -0.5em -0.3em; }
+
+  /* Card spotlight: a radial glow that follows --mx/--my set from JS */
+  .spotlight {
+    position: relative;
+    isolation: isolate;
+  }
+  .spotlight::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgb(255 20 160 / 0.16), transparent 45%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: -1;
+  }
+  .spotlight:hover::before { opacity: 1; }
+
+  .field {
+    @apply w-full border border-white/10 bg-ink-950/80 px-3.5 py-2.5 text-sm text-chalk
+           placeholder:text-mist-500 transition-colors focus:border-pink-500/80 focus:outline-none;
+  }
+
+  /* Halftone: the mesh of the cap. Dots, masked to fade at the edges. */
+  .bg-halftone {
+    background-image: radial-gradient(rgb(255 255 255 / 0.09) 1px, transparent 1.4px);
+    background-size: 14px 14px;
+    mask-image: radial-gradient(ellipse at center, #000 10%, transparent 72%);
+  }
+  .bg-halftone-pink {
+    background-image: radial-gradient(rgb(255 20 160 / 0.35) 1px, transparent 1.5px);
+    background-size: 12px 12px;
+  }
+
+  /* Diagonal hazard stripes in pink, for edges and tags */
+  .bg-stripes {
+    background-image: repeating-linear-gradient(-45deg, rgb(255 20 160 / 0.9) 0 10px, transparent 10px 22px);
+  }
+
+  /* Perforation: a dashed tear line for tickets */
+  .perforated {
+    background-image: linear-gradient(to bottom, rgb(255 255 255 / 0.35) 50%, transparent 50%);
+    background-size: 1px 10px;
+  }
+}
+
+/* Film grain over the whole page: breaks up banding in the dark gradients */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  animation: thl-grain 1.2s steps(6) infinite;
+}
+
+/* ── Tebex rich descriptions ──────────────────────────────────────
+   Owners author these for the Tebex hosted theme: centred headings,
+   inline sizes, stacked <p>. Re-anchored into this type scale. */
+.thl-rich { text-align: left !important; line-height: 1.75; }
+.thl-rich * { text-align: inherit !important; }
+.thl-rich p, .thl-rich ul, .thl-rich ol, .thl-rich blockquote, .thl-rich table { margin-block: 0.85em; }
+.thl-rich > :first-child { margin-top: 0; }
+.thl-rich > :last-child { margin-bottom: 0; }
+.thl-rich h1, .thl-rich h2, .thl-rich h3, .thl-rich h4, .thl-rich h5, .thl-rich h6 {
+  font-family: var(--font-display);
+  font-stretch: 85%;
+  font-weight: 700;
+  color: var(--color-chalk);
+  font-size: 1.05rem;
+  letter-spacing: 0;
+  margin-block: 1.6em 0.6em;
+}
+.thl-rich strong, .thl-rich b { color: var(--color-mist-100); font-weight: 700; }
+.thl-rich a { color: var(--color-pink-400); text-decoration: underline; text-underline-offset: 3px; }
+.thl-rich a:hover { color: var(--color-pink-300); }
+.thl-rich ul { list-style: none; padding-left: 0; }
+.thl-rich ul li { position: relative; padding-left: 1.6em; margin-block: 0.5em; }
+.thl-rich ul li::before {
+  content: "";
+  position: absolute;
+  left: 0.2em;
+  top: 0.68em;
+  width: 0.5em;
+  height: 0.5em;
+  background: var(--color-pink-500);
+  transform: skewX(-10deg);
+}
+.thl-rich ol { list-style: decimal; padding-left: 1.3em; }
+.thl-rich ol li::marker { color: var(--color-pink-400); font-family: var(--font-label); }
+.thl-rich hr { border-color: rgb(255 255 255 / 0.08); margin-block: 1.5em; }
+.thl-rich blockquote { border-left: 2px solid var(--color-pink-600); padding-left: 1em; color: var(--color-mist-400); }
+.thl-rich table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+.thl-rich th, .thl-rich td { border-bottom: 1px solid rgb(255 255 255 / 0.08); padding: 0.6em 0.5em; }
+.thl-rich th { color: var(--color-chalk); font-weight: 700; }
+
+/* ── Keyframes ───────────────────────────────────────────────────── */
+@keyframes thl-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes thl-grain {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-3%, 2%); }
+  40% { transform: translate(2%, -3%); }
+  60% { transform: translate(-2%, -1%); }
+  80% { transform: translate(3%, 3%); }
+}
+
+@keyframes thl-shimmer {
+  from { background-position: -200% 0; }
+  to { background-position: 200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, rgb(255 255 255 / 0.02) 0%, rgb(255 255 255 / 0.06) 50%, rgb(255 255 255 / 0.02) 100%);
+  background-size: 200% 100%;
+  animation: thl-shimmer 1.6s linear infinite;
+}
+
+@keyframes thl-pulse-ring {
+  0% { transform: scale(0.6); opacity: 0.9; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+/* Neon sign flicker: mostly steady, with a stutter at a fixed moment in the loop */
+@keyframes thl-flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+  20%, 24%, 55% { opacity: 0.55; }
+}
+
+/* Intro curtain lift */
+@keyframes thl-curtain {
+  to { transform: translateY(-101%); }
+}

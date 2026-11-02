@@ -1,0 +1,11 @@
+node_modules
+dist
+.env
+.env.local
+.env.*.local
+.netlify
+.gstack
+*.log
+.DS_Store
+Thumbs.db
+.claude/settings.json
