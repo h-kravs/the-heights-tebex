@@ -19,7 +19,7 @@ export default function Footer() {
 
       <div className="container-x relative grid gap-12 py-16 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
-          <img src="/brand/logo.webp" alt="The Heights LA" className="h-16 w-auto drop-shadow-[0_0_18px_rgba(255,20,160,0.45)]" loading="lazy" />
+          <img src="/brand/logo-sm.webp" alt="The Heights LA" width="58" height="64" className="h-16 w-auto drop-shadow-[0_0_18px_rgba(255,20,160,0.45)]" loading="lazy" />
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-mist-400">
             UK-run FiveM roleplay, set in the heights above LA. Every purchase keeps the servers, scripts and events running.
           </p>
@@ -73,7 +73,7 @@ export default function Footer() {
       {/* Oversized wordmark bleeding off the bottom edge */}
       <div className="container-x relative select-none" aria-hidden="true">
         <p className="text-outline -mb-[0.2em] whitespace-nowrap text-center font-display text-[clamp(3.6rem,15vw,15rem)] font-black uppercase leading-none tracking-[-0.02em]">
-          The Heights
+          The Heights LA
         </p>
       </div>
 

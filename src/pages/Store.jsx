@@ -36,7 +36,7 @@ function Pill({ to, active, icon, label, count }) {
       <span className="relative flex items-center gap-2">
         {icon && <Icon name={icon} size={15} strokeWidth={2.2} />}
         {label}
-        {count != null && <span className={`text-[0.66rem] ${active ? 'text-void/70' : 'text-mist-500'}`}>{count}</span>}
+        {count != null && <span className={`text-[0.66rem] ${active ? 'text-void' : 'text-mist-500'}`}>{count}</span>}
       </span>
     </Link>
   )
@@ -184,7 +184,7 @@ export default function Store() {
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.5, delay: Math.min(i * 0.035, 0.3), ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <ProductCard pkg={pkg} priority={i < 4} />
+                  <ProductCard pkg={pkg} priority={i < 2} headingLevel="h2" />
                 </motion.div>
               ))}
             </AnimatePresence>

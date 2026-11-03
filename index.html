@@ -25,16 +25,14 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="preload" as="image" href="/brand/logo.webp" type="image/webp" />
+    <!-- Kept render-blocking on purpose: the app is JS-rendered anyway, and loading the fonts
+         asynchronously made the condensed headlines reflow once Archivo arrived (CLS 0.12). -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" />
+    <link rel="preload" as="image" href="/brand/logo-sm.webp" type="image/webp" />
   </head>
   <body>
     <div id="root"></div>
-    <!-- Tebex Checkout SDK: `window.Tebex` opens the payment overlay (src/stores/cartStore.jsx). -->
-    <script src="https://js.tebex.io/v/1.js" defer></script>
+    <!-- The Tebex Checkout SDK (js.tebex.io) is injected on demand by src/stores/cartStore.jsx. -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

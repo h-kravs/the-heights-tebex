@@ -58,8 +58,8 @@ function Gallery({ pkg, images }) {
         </AnimatePresence>
         <div className="pointer-events-none absolute inset-0  ring-1 ring-inset ring-white/[0.06]" />
         {discount > 0 && (
-          <span className="absolute left-5 top-5 rounded-full bg-pink-500 px-3.5 py-1.5 font-label text-xs font-bold text-white shadow-[0_0_30px_-4px_rgb(255_20_160)]">
-            -{discount}% off
+          <span className="absolute left-5 top-5 bg-pink-500 px-3.5 py-1.5 font-label text-xs font-bold uppercase tracking-[0.1em] text-void shadow-[0_0_30px_-4px_rgb(255_20_160)] [transform:skewX(-8deg)]">
+            <span className="block [transform:skewX(8deg)]">-{discount}% off</span>
           </span>
         )}
       </div>
@@ -127,7 +127,7 @@ export default function Product() {
   if (!pkg) {
     return (
       <div className="container-x flex min-h-[75svh] flex-col items-center justify-center pt-24 text-center">
-        <img src="/brand/logo.webp" alt="" className="w-40 opacity-30 grayscale" />
+        <img src="/brand/logo-md.webp" alt="" width="448" height="491" className="h-auto w-40 opacity-30 grayscale" />
         <h1 className="mt-8 text-4xl font-black uppercase">Package not found</h1>
         <p className="mt-3 max-w-md text-mist-400">This package is no longer available, or the link is wrong.</p>
         <Link to="/store" className="btn-primary mt-8">

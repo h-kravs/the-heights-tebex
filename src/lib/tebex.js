@@ -273,7 +273,8 @@ export function packageGallery(pkg) {
   const push = (url) => {
     if (!url || typeof url !== 'string') return
     const clean = url.trim()
-    if (!/^https:\/\//i.test(clean) || seen.has(clean)) return // never data: or javascript:
+    // https, or a same-origin path (the demo artwork). Never data:, javascript: or //host.
+    if (!/^(https:\/\/|\/(?!\/))/i.test(clean) || seen.has(clean)) return
     seen.add(clean)
     urls.push(clean)
   }

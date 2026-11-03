@@ -37,7 +37,7 @@ export default function PackageArt({ pkg, className = '', compact = false }) {
         />
       </span>
       {!compact && (
-        <img src="/brand/logo.webp" alt="" loading="lazy" className="absolute bottom-3 right-3 w-12 opacity-80 drop-shadow-[0_0_10px_rgba(255,20,160,0.6)]" />
+        <img src="/brand/logo-sm.webp" alt="" loading="lazy" width="160" height="176" className="absolute bottom-3 right-3 h-auto w-12 opacity-80 drop-shadow-[0_0_10px_rgba(255,20,160,0.6)]" />
       )}
     </div>
   )

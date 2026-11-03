@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 
@@ -13,11 +13,13 @@ import Intro from './components/Intro'
 import Home from './pages/Home'
 import Store from './pages/Store'
 import Product from './pages/Product'
-import Vip from './pages/Vip'
-import Support from './pages/Support'
-import ThankYou from './pages/ThankYou'
-import Legal from './pages/Legal'
-import NotFound from './pages/NotFound'
+// The pages people land on (home, store, product) ship eagerly so their
+// largest paint never waits on a second chunk; the rest is split out.
+const Vip = lazy(() => import('./pages/Vip'))
+const Support = lazy(() => import('./pages/Support'))
+const ThankYou = lazy(() => import('./pages/ThankYou'))
+const Legal = lazy(() => import('./pages/Legal'))
+const NotFound = lazy(() => import('./pages/NotFound'))
 
 import { ToastProvider } from './stores/toastStore'
 import { CatalogProvider } from './stores/catalogStore'
@@ -33,7 +35,7 @@ function Page({ children }) {
       transition={{ duration: 0.3, ease: 'easeOut' }}
       onAnimationStart={(definition) => definition?.opacity === 1 && scrollToTop()}
     >
-      {children}
+      <Suspense fallback={<div className="min-h-dvh" aria-busy="true" />}>{children}</Suspense>
     </motion.div>
   )
 }

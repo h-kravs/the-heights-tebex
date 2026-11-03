@@ -82,9 +82,10 @@ function AccountControl() {
 function CartButton() {
   const { count, open, lastAdded } = useCart()
   return (
-    <button type="button" onClick={open} aria-label={`Open cart, ${count} ${count === 1 ? 'item' : 'items'}`} className={`${slab} bg-pink-500 text-white shadow-[4px_4px_0_0_var(--color-chalk)] hover:bg-pink-400`}>
+    <button type="button" onClick={open} className={`${slab} bg-pink-500 text-void shadow-[4px_4px_0_0_var(--color-chalk)] hover:bg-pink-400`}>
       <Icon name="cart" size={17} />
       <span className="hidden sm:inline">Cart</span>
+      <span className="sr-only">{count === 1 ? 'item' : 'items'} in cart:</span>
       <motion.span
         key={lastAdded?.at || 'idle'}
         initial={lastAdded ? { scale: 1.6 } : false}
@@ -134,11 +135,11 @@ export default function Navbar() {
         }`}
       >
         <div className="container-x flex h-[4.5rem] items-center justify-between gap-4">
-          <Link to="/" className="flex shrink-0 items-center gap-3" aria-label="The Heights LA, back to home">
-            <img src="/brand/logo.webp" alt="The Heights LA" width="44" height="48" className="h-11 w-auto drop-shadow-[0_0_14px_rgba(255,20,160,0.5)]" />
+          <Link to="/" className="flex shrink-0 items-center gap-3">
+            <img src="/brand/logo-sm.webp" alt="The Heights LA" width="44" height="48" className="h-11 w-auto drop-shadow-[0_0_14px_rgba(255,20,160,0.5)]" />
             <span className="hidden font-display text-[1.15rem] font-black uppercase leading-none text-chalk md:block">
-              The Heights
-              <span className="mt-1 block font-label text-[0.62rem] tracking-[0.2em] text-pink-400">LA · Official store</span>
+              The Heights LA
+              <span className="mt-1 block font-label text-[0.62rem] tracking-[0.2em] text-pink-400">Official store</span>
             </span>
           </Link>
 
@@ -174,7 +175,7 @@ export default function Navbar() {
             <div className="pointer-events-none absolute inset-x-0 top-0 h-2/3 bg-[radial-gradient(60%_50%_at_80%_0%,rgb(255_20_160/0.28),transparent)]" />
             <div className="bg-halftone pointer-events-none absolute inset-0" />
             <div className="relative flex items-center justify-between">
-              <img src="/brand/logo.webp" alt="The Heights LA" className="h-11 w-auto" />
+              <img src="/brand/logo-sm.webp" alt="The Heights LA" width="44" height="48" className="h-11 w-auto" />
               <button type="button" onClick={() => setMenuOpen(false)} aria-label="Close menu" className="flex h-11 w-11 cursor-pointer items-center justify-center border border-white/20 text-chalk">
                 <Icon name="close" size={20} />
               </button>

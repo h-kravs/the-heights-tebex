@@ -72,6 +72,31 @@ function removeKeys(...keys) {
 
 const basketQuantity = (p) => Number(p?.in_basket?.quantity ?? p?.quantity ?? 1)
 
+/*
+ * Tebex Checkout SDK, loaded only once someone opens the cart. Keeping it
+ * off the first paint saves a third-party script and its cookie on every
+ * page view where nobody buys anything.
+ */
+const TEBEX_SDK_URL = 'https://js.tebex.io/v/1.js'
+let sdkPromise = null
+export function loadTebexSdk() {
+  if (typeof window === 'undefined') return Promise.reject(new Error('no window'))
+  if (window.Tebex?.checkout) return Promise.resolve(window.Tebex)
+  if (sdkPromise) return sdkPromise
+  sdkPromise = new Promise((resolve, reject) => {
+    const script = document.createElement('script')
+    script.src = TEBEX_SDK_URL
+    script.async = true
+    script.onload = () => (window.Tebex?.checkout ? resolve(window.Tebex) : reject(new Error('Tebex SDK missing')))
+    script.onerror = () => {
+      sdkPromise = null
+      reject(new Error('Tebex SDK blocked'))
+    }
+    document.head.appendChild(script)
+  })
+  return sdkPromise
+}
+
 export function CartProvider({ children }) {
   const { packages: catalog, isLoading: catalogLoading, isFallback } = useCatalog()
   const toast = useToast()
@@ -94,7 +119,10 @@ export function CartProvider({ children }) {
   const isAuthenticated = !!(basket?.username_id || basket?.username)
   const username = basket?.username || null
 
-  const open = useCallback(() => setIsOpen(true), [])
+  const open = useCallback(() => {
+    setIsOpen(true)
+    loadTebexSdk().catch(() => {}) // warm the SDK while the buyer reviews the cart
+  }, [])
   const close = useCallback(() => {
     setIsOpen(false)
     removeKeys(REOPEN_KEY)
@@ -379,7 +407,7 @@ export function CartProvider({ children }) {
       }
       if (failures.length) return { error: 'partial', failures }
 
-      const Tebex = window.Tebex
+      const Tebex = await loadTebexSdk().catch(() => null)
       if (Tebex?.checkout) {
         Tebex.checkout.init({
           ident: fresh.ident,

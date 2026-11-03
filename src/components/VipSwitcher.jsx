@@ -16,7 +16,8 @@ const EASE = [0.16, 1, 0.3, 1]
  * better than three columns of ticks, and the owner's `[Popular]` tag picks
  * which tier is open on arrival.
  */
-export default function VipSwitcher({ tiers }) {
+export default function VipSwitcher({ tiers, headingLevel = 'h3' }) {
+  const Heading = headingLevel
   const { addItem, has, open } = useCart()
   const { currency } = useCatalog()
   const ordered = [...tiers].sort((a, b) => packagePrice(a) - packagePrice(b))
@@ -43,7 +44,7 @@ export default function VipSwitcher({ tiers }) {
           const selected = tier.id === active.id
           const colour = tierAccent(tier.name, i)
           return (
-            <li key={tier.id} className="min-w-[11rem] flex-1 lg:min-w-0">
+            <li key={tier.id} role="presentation" className="min-w-[11rem] flex-1 lg:min-w-0">
               <button
                 type="button"
                 role="tab"
@@ -90,10 +91,10 @@ export default function VipSwitcher({ tiers }) {
                 <span className="eyebrow-ghost" style={{ borderColor: accent, color: accent }}>
                   <span>{tags[0] || 'Membership'}</span>
                 </span>
-                <h3 className="mt-4 text-[clamp(2.6rem,5vw,4.4rem)] font-black uppercase leading-[0.9]">
+                <Heading className="mt-4 text-[clamp(2.6rem,5vw,4.4rem)] font-black uppercase leading-[0.9]">
                   {active.name.replace(/^heights\s+/i, '')}
                   <span className="block font-display text-[0.45em] font-black text-mist-400">every month</span>
-                </h3>
+                </Heading>
               </div>
               <div className="text-right">
                 <p className="font-display text-[clamp(2.6rem,5vw,4.4rem)] font-black leading-none text-chalk tabular-nums">{formatPrice(packagePrice(active), money)}</p>

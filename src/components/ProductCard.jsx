@@ -12,7 +12,8 @@ import { useCatalog } from '../stores/catalogStore'
  * an "add" bar that slides up from the bottom edge. The whole card is the
  * link; the bar adds to cart without navigating.
  */
-export default function ProductCard({ pkg, priority = false }) {
+export default function ProductCard({ pkg, priority = false, headingLevel = 'h3' }) {
+  const Heading = headingLevel
   const { addItem, has, open } = useCart()
   const { currency } = useCatalog()
   const inCart = has(pkg.id)
@@ -25,10 +26,10 @@ export default function ProductCard({ pkg, priority = false }) {
 
   return (
     <article className="group relative flex h-full flex-col overflow-hidden border border-white/10 bg-ink-900 transition-colors duration-500 ease-out hover:border-pink-500/60">
-      <Link to={productPath(pkg)} className="flex flex-1 flex-col" aria-label={pkg.name}>
+      <Link to={productPath(pkg)} className="flex flex-1 flex-col">
         <div className="relative aspect-[4/3] overflow-hidden">
           {pkg.image ? (
-            <img src={pkg.image} alt="" loading={priority ? 'eager' : 'lazy'} className="h-full w-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.06]" />
+            <img src={pkg.image} alt="" loading={priority ? 'eager' : 'lazy'} fetchPriority={priority ? 'high' : 'auto'} decoding="async" className="h-full w-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.06]" />
           ) : (
             <PackageArt pkg={pkg} className="h-full w-full transition-transform duration-[1.2s] ease-out group-hover:scale-[1.06]" />
           )}
@@ -38,7 +39,7 @@ export default function ProductCard({ pkg, priority = false }) {
           <div className="absolute left-3 top-3 -rotate-3 transition-transform duration-500 group-hover:rotate-0">
             <span className="flex items-baseline gap-1.5 bg-chalk px-3 py-1.5 font-display text-[1.15rem] font-black leading-none text-void shadow-[3px_3px_0_0_var(--color-pink-500)] [transform:skewX(-8deg)]">
               <span className="[transform:skewX(8deg)]">{formatPrice(packagePrice(pkg), money)}</span>
-              {billingPeriod(pkg) && <span className="font-label text-[0.6rem] uppercase tracking-wider text-mist-500 [transform:skewX(8deg)]">{billingPeriod(pkg)}</span>}
+              {billingPeriod(pkg) && <span className="font-label text-[0.6rem] uppercase tracking-wider text-void/75 [transform:skewX(8deg)]">{billingPeriod(pkg)}</span>}
             </span>
             {compare && <span className="mt-1.5 block pl-1 font-label text-[0.68rem] text-mist-300 line-through">{formatPrice(compare, money)}</span>}
           </div>
@@ -59,7 +60,7 @@ export default function ProductCard({ pkg, priority = false }) {
 
         <div className="flex flex-1 flex-col px-5 pb-6 pt-2">
           {pkg.categoryName && <span className="font-label text-[0.66rem] uppercase tracking-[0.18em] text-pink-400">{pkg.categoryName}</span>}
-          <h3 className="mt-1.5 text-[1.7rem] font-black uppercase leading-[0.95] text-chalk transition-colors group-hover:text-pink-200">{pkg.name}</h3>
+          <Heading className="mt-1.5 text-[1.7rem] font-black uppercase leading-[0.95] text-chalk transition-colors group-hover:text-pink-200">{pkg.name}</Heading>
           {excerpt && <p className="mt-2.5 line-clamp-2 text-[0.84rem] leading-relaxed text-mist-400">{excerpt}</p>}
         </div>
       </Link>
@@ -69,9 +70,9 @@ export default function ProductCard({ pkg, priority = false }) {
         type="button"
         whileTap={{ scale: 0.98 }}
         onClick={() => (inCart ? open() : addItem(pkg))}
-        aria-label={inCart ? `${pkg.name} is in your cart` : `Add ${pkg.name} to cart`}
+        aria-label={inCart ? `In your cart: ${pkg.name}` : `Add to cart: ${pkg.name}`}
         className={`absolute inset-x-0 bottom-0 flex h-12 cursor-pointer items-center justify-center gap-2 font-label text-[0.8rem] uppercase tracking-[0.12em] transition-transform duration-300 ease-out [@media(hover:hover)]:translate-y-full [@media(hover:hover)]:group-hover:translate-y-0 ${
-          inCart ? 'bg-chalk text-void' : 'bg-pink-500 text-white'
+          inCart ? 'bg-chalk text-void' : 'bg-pink-500 text-void'
         }`}
       >
         <Icon name={inCart ? 'check' : 'plus'} size={17} strokeWidth={2.4} />

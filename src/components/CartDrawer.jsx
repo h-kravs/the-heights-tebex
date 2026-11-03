@@ -119,7 +119,7 @@ export default function CartDrawer() {
               <div className="flex flex-1 flex-col items-center justify-center gap-5 px-8 text-center">
                 <div className="relative">
                   <div className="absolute inset-0 rounded-full bg-pink-500/25 blur-2xl" />
-                  <img src="/brand/logo.webp" alt="" className="relative w-36 opacity-90" />
+                  <img src="/brand/logo-md.webp" alt="" width="448" height="491" className="relative h-auto w-36 opacity-90" />
                 </div>
                 <div>
                   <p className="font-display text-xl font-black uppercase text-chalk">Nothing in here yet</p>

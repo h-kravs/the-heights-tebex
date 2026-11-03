@@ -23,6 +23,10 @@ const VOID = { r: 6, g: 3, b: 10, alpha: 1 }
 const trimmed = await sharp(SRC).trim().png().toBuffer()
 
 await sharp(trimmed).resize({ width: 640 }).webp({ quality: 90, alphaQuality: 100 }).toFile(join(OUT, 'brand/logo.webp'))
+// Closing call-to-action on the home page: shown at 176 to 224px wide, 2x screens.
+await sharp(trimmed).resize({ width: 448 }).webp({ quality: 88, alphaQuality: 100 }).toFile(join(OUT, 'brand/logo-md.webp'))
+// Navbar / footer / menu: shown at 44 to 64px tall, so 160px wide covers 2.5x screens.
+await sharp(trimmed).resize({ width: 160 }).webp({ quality: 88, alphaQuality: 100 }).toFile(join(OUT, 'brand/logo-sm.webp'))
 // WebGL texture in the hero. Power-of-two-ish width keeps mipmaps clean.
 await sharp(trimmed).resize({ width: 1024 }).webp({ quality: 92, alphaQuality: 100 }).toFile(join(OUT, 'brand/logo-hd.webp'))
 
@@ -63,7 +67,7 @@ await sharp(glow)
   .jpeg({ quality: 88 })
   .toFile(join(OUT, 'brand/og-cover.jpg'))
 
-for (const f of ['brand/logo.webp', 'brand/logo-hd.webp', 'favicon-32.png', 'apple-touch-icon.png', 'favicon-512.png', 'brand/og-cover.jpg']) {
+for (const f of ['brand/logo.webp', 'brand/logo-md.webp', 'brand/logo-sm.webp', 'brand/logo-hd.webp', 'favicon-32.png', 'apple-touch-icon.png', 'favicon-512.png', 'brand/og-cover.jpg']) {
   const { width, height } = await sharp(join(OUT, f)).metadata()
   console.log(`${f.padEnd(22)} ${width}×${height}  ${(statSync(join(OUT, f)).size / 1024).toFixed(1)} KB`)
 }

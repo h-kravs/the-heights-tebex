@@ -43,7 +43,7 @@ export default function Vip() {
             </p>
           </Reveal>
         )}
-        {isLoading ? <div className="shimmer h-[32rem] border border-white/[0.06]" /> : <Reveal><VipSwitcher tiers={tiers} /></Reveal>}
+        {isLoading ? <div className="shimmer h-[32rem] border border-white/[0.06]" /> : <Reveal><VipSwitcher tiers={tiers} headingLevel="h2" /></Reveal>}
       </section>
 
       <section className="container-x pb-24">

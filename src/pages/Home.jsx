@@ -1,4 +1,4 @@
-import { lazy, Suspense, useRef, useState } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion'
 
@@ -115,6 +115,18 @@ function HeroTicket({ pkg, style }) {
 
 function Hero({ drop }) {
   const [webgl] = useState(() => hasWebGL())
+  // The sign paints first as CSS; Three.js mounts once the main thread is idle.
+  const [sceneReady, setSceneReady] = useState(false)
+  useEffect(() => {
+    if (!webgl) return undefined
+    const start = () => setSceneReady(true)
+    if ('requestIdleCallback' in window) {
+      const id = window.requestIdleCallback(start, { timeout: 1200 })
+      return () => window.cancelIdleCallback(id)
+    }
+    const t = setTimeout(start, 250)
+    return () => clearTimeout(t)
+  }, [webgl])
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
   const copyY = useTransform(scrollYProgress, [0, 1], [0, 140])
@@ -129,7 +141,7 @@ function Hero({ drop }) {
   return (
     // Below lg the sign sits above the copy, so the copy starts under it.
     <section ref={ref} className="relative flex min-h-[100svh] items-end overflow-hidden pb-16 pt-[44svh] lg:items-center lg:pb-10 lg:pt-28">
-      {webgl ? (
+      {webgl && sceneReady ? (
         <Suspense fallback={<StaticHeights />}>
           <HeightsScene />
         </Suspense>
@@ -619,7 +631,7 @@ function FinalCta() {
           </motion.div>
 
           <div className="relative flex flex-col items-center">
-            <img src="/brand/logo.webp" alt="The Heights LA" loading="lazy" className="w-44 drop-shadow-[0_20px_50px_rgba(255,20,160,0.5)] sm:w-56" />
+            <img src="/brand/logo-md.webp" alt="The Heights LA" width="448" height="491" loading="lazy" className="h-auto w-44 drop-shadow-[0_20px_50px_rgba(255,20,160,0.5)] sm:w-56" />
             <h2 className="mt-10 max-w-3xl text-[clamp(2.4rem,6vw,5rem)] font-black uppercase leading-[0.9]">
               The city is waiting. <span className="text-neon whitespace-nowrap">You in?</span>
             </h2>
