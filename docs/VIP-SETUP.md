@@ -216,11 +216,11 @@ highlight tag, the most expensive one wins.
 
 ---
 
-## 4. Tier colours
+## 4. Tier colors
 
 Taken from the package name automatically:
 
-| Name contains | Colour |
+| Name contains | Color |
 |---|---|
 | bronze, copper | bronze |
 | silver, steel | silver |
@@ -230,7 +230,7 @@ Taken from the package name automatically:
 | amethyst, purple | purple |
 | emerald, jade | green |
 | ruby, crimson | red |
-| obsidian, onyx, black | grey |
+| obsidian, onyx, black | gray |
 
 Anything else falls back to the store's magenta/violet ramp. So `DISTRICT AMETHYST`
 renders purple with no configuration.

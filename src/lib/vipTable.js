@@ -60,7 +60,7 @@ export function pickFeatured(tiers) {
   return tiers.length >= 3 ? tiers[1] : tiers[0]
 }
 
-/** Tier accent colours. Named metals/gems win; otherwise the brand ramp. */
+/** Tier accent colors. Named metals/gems win; otherwise the brand ramp. */
 const NAMED_ACCENTS = [
   [/bronze|copper/i, '#d08a52'],
   [/silver|steel/i, '#c3cbd8'],
@@ -181,7 +181,7 @@ export function quantityOf(bullet) {
   // "1v1 arena", "Season 2.0". Strip them before looking for a quantity.
   const scrubbed = bullet.replace(/\b\d+\s*[/vx:.-]\s*\d+\b/gi, ' ')
 
-  const numeric = scrubbed.match(/([+-]?[$€£]?\d[\d.,]*\s*[%kKxX]?)(?![/\d])/)
+  const numeric = scrubbed.match(/([+-]?[$€$]?\d[\d.,]*\s*[%kKxX]?)(?![/\d])/)
   if (numeric) return numeric[1].replace(/\s+/g, '').toUpperCase()
 
   const unlimited = bullet.match(/\b(unlimited|lifetime|permanent)\b/i)
@@ -197,7 +197,7 @@ export function quantityOf(bullet) {
  */
 function label(bullet) {
   const clean = bullet
-    .replace(/^[+-]?[$€£]?\d[\d.,]*\s*[%kKxX]?\s*/, '')
+    .replace(/^[+-]?[$€$]?\d[\d.,]*\s*[%kKxX]?\s*/, '')
     .replace(/^(?:unlimited|lifetime|permanent)\s+/i, '')
     .replace(/\s{2,}/g, ' ')
     .trim()

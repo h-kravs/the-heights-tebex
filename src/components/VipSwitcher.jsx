@@ -42,7 +42,7 @@ export default function VipSwitcher({ tiers, headingLevel = 'h3' }) {
       <ul className="flex overflow-x-auto border-b border-white/10 lg:flex-col lg:overflow-visible lg:border-b-0 lg:border-r [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" role="tablist">
         {ordered.map((tier, i) => {
           const selected = tier.id === active.id
-          const colour = tierAccent(tier.name, i)
+          const color = tierAccent(tier.name, i)
           return (
             <li key={tier.id} role="presentation" className="min-w-[11rem] flex-1 lg:min-w-0">
               <button
@@ -52,7 +52,7 @@ export default function VipSwitcher({ tiers, headingLevel = 'h3' }) {
                 onClick={() => setActiveId(tier.id)}
                 className={`relative flex h-full w-full cursor-pointer flex-col justify-between gap-6 p-6 text-left transition-colors lg:p-8 ${selected ? 'bg-ink-850' : 'hover:bg-white/[0.03]'}`}
               >
-                {selected && <motion.span layoutId="vip-edge" className="absolute inset-y-0 left-0 w-1" style={{ background: colour, boxShadow: `0 0 18px ${colour}` }} transition={{ type: 'spring', stiffness: 400, damping: 36 }} />}
+                {selected && <motion.span layoutId="vip-edge" className="absolute inset-y-0 left-0 w-1" style={{ background: color, boxShadow: `0 0 18px ${color}` }} transition={{ type: 'spring', stiffness: 400, damping: 36 }} />}
                 <span className="flex items-center justify-between font-label text-[0.66rem] uppercase tracking-[0.18em] text-mist-500">
                   <span>Tier 0{i + 1}</span>
                   {tier.id === featured?.id && <span className="bg-pink-500 px-1.5 py-0.5 text-void">Most picked</span>}

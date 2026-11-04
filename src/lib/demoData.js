@@ -9,7 +9,7 @@ export const DEMO_WEBSTORE = {
   name: 'The Heights LA',
   description: 'Official store',
   webstore_url: 'https://theheightsla.tebex.io',
-  currency: 'GBP',
+  currency: 'USD',
   lang: 'en',
   platform_type: 'FiveM',
 }
@@ -30,7 +30,7 @@ const pkg = (name, price, { base, tags = [], description = '', type = 'single', 
     sales_tax: 0,
     total_price: price,
     discount: base ? Number((base - price).toFixed(2)) : 0,
-    currency: 'GBP',
+    currency: 'USD',
     disable_quantity: type === 'subscription',
     disable_gifting: false,
     expiration_date: null,
@@ -77,7 +77,7 @@ export const DEMO_CATEGORIES = [
     packages: [
       pkg('Starter Pack', 14.99, {
         base: 22.99, category: 2, tags: ['Featured', 'Popular'],
-        description: `<p>Everything your first character needs on day one.</p>${list(['BMW M3 Competition', 'Exclusive streetwear set', '£25,000 starting cash', 'Phone with SIM card'])}`,
+        description: `<p>Everything your first character needs on day one.</p>${list(['BMW M3 Competition', 'Exclusive streetwear set', '$25,000 starting cash', 'Phone with SIM card'])}`,
       }),
       pkg('Business Pack', 39.99, {
         base: 54.99, category: 2, tags: ['Bundle'],
@@ -100,7 +100,7 @@ export const DEMO_CATEGORIES = [
     packages: [
       pkg('Audi RS6 Avant', 27.99, {
         category: 3, tags: ['Featured', 'New'],
-        description: `<p>The family car with 600 horsepower under the bonnet.</p>${list(['Straight to your garage', 'Registered in your name', 'Nardo grey or matte black', 'Stage 2 tune included'])}`,
+        description: `<p>The family car with 600 horsepower under the hood.</p>${list(['Straight to your garage', 'Registered in your name', 'Nardo gray or matte black', 'Stage 2 tune included'])}`,
       }),
       pkg('Mercedes-AMG G63', 32.99, {
         category: 3,
@@ -108,7 +108,7 @@ export const DEMO_CATEGORIES = [
       }),
       pkg('BMW M5 CS', 24.99, {
         base: 29.99, category: 3,
-        description: `<p>A saloon with the heart of a race car.</p>${list(['Carbon interior', 'Sport exhaust', 'Launch control'])}`,
+        description: `<p>A sedan with the heart of a race car.</p>${list(['Carbon interior', 'Sport exhaust', 'Launch control'])}`,
       }),
       pkg('Porsche 911 Turbo S', 36.99, {
         category: 3, tags: ['Popular'],
@@ -135,7 +135,7 @@ export const DEMO_CATEGORIES = [
     packages: [
       pkg('Your own crew', 54.99, {
         category: 4, tags: ['Popular'],
-        description: `<p>Found your own organisation, with its own HQ.</p>${list(['Private headquarters', 'Crew storage', 'Clothing in your colours', 'Up to 12 members'])}`,
+        description: `<p>Found your own organization, with its own HQ.</p>${list(['Private headquarters', 'Crew storage', 'Clothing in your colors', 'Up to 12 members'])}`,
       }),
       pkg('Hidden workshop', 27.99, {
         category: 4,
@@ -143,7 +143,7 @@ export const DEMO_CATEGORIES = [
       }),
       pkg('Laundromat front', 32.99, {
         base: 44.99, category: 4, tags: ['Limited'],
-        description: `<p>A laundrette as a front. What happens in the back is on you.</p>`,
+        description: `<p>A laundromat as a front. What happens in the back is on you.</p>`,
       }),
     ],
   },

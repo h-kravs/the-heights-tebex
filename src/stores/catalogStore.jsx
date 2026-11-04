@@ -62,7 +62,7 @@ export function CatalogProvider({ children }) {
       packages,
       featured,
       webstore,
-      currency: webstore?.currency || 'GBP',
+      currency: webstore?.currency || 'USD',
       isLoading: status === 'loading',
       // True when a token is configured but Tebex did not answer: the catalog on
       // screen is sample data, so checkout must behave like demo mode.

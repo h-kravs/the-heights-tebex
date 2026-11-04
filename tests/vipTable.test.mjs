@@ -166,7 +166,7 @@ check('packages with prose only → no rows',
   ]).rows,
   [])
 
-check('named tiers get their metal colour', tierAccent('District Gold', 0), '#f0c34a')
+check('named tiers get their metal color', tierAccent('District Gold', 0), '#f0c34a')
 check('unnamed tiers fall back to the brand ramp', tierAccent('Starter Pass', 1), '#ff6cc8')
 
 /* ── placeholders appear only while the store has no VIP tiers ── */

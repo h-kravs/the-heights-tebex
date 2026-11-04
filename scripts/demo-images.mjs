@@ -14,7 +14,7 @@ export const PROMPTS = {
   1004: 'a starter kit laid out: a white BMW M3 Competition key fob, streetwear hoodie, stack of pound notes and a smartphone on a black table',
   1005: 'a small neon-lit storefront business at night in LA with a Mercedes Sprinter van parked outside',
   1006: 'a lamborghini urus performante parked in front of a modern hillside mansion overlooking LA at night, magenta neon',
-  1007: 'an audi rs6 avant in nardo grey, three quarter view, parked on a hillside road above LA at night',
+  1007: 'an audi rs6 avant in nardo gray, three quarter view, parked on a hillside road above LA at night',
   1008: 'a matte black mercedes g63 amg with brabus kit, front three quarter, neon pink reflections',
   1009: 'a bmw m5 cs in frozen deep green, low angle, downtown LA street at night',
   1010: 'a porsche 911 turbo s in white with a subtle pink livery, side view, rooftop car park at night',
@@ -25,7 +25,7 @@ export const PROMPTS = {
   1015: 'a vintage laundromat storefront at night, washing machines glowing inside, neon sign',
   1016: 'two empty theatre-style seats under a spotlight with a glowing pink outline of a silhouette, character slot concept',
   1017: 'a metal dog tag name plate on a chain, engraving blank, macro, pink neon light',
-  1018: 'a custom black UK number plate with pink lettering mounted on a car bumper, macro',
+  1018: 'a custom black US license plate with pink lettering mounted on a car bumper, macro',
   1019: 'a smartphone on a dark table showing a glowing pink dial screen, macro',
 }
 

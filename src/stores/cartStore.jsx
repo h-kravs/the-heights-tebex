@@ -39,7 +39,7 @@ const BASKET_KEY = 'thl_basket_ident'
 const ANSWERS_KEY = 'thl_option_answers'
 const REOPEN_KEY = 'thl_reopen_cart'
 
-/** Brand colours handed to the Tebex overlay so the pop-up matches the site. */
+/** Brand colors handed to the Tebex overlay so the pop-up matches the site. */
 const CHECKOUT_COLORS = [
   { name: 'primary', color: '#ff14a0' },
   { name: 'secondary', color: '#ff6cc8' },
@@ -412,7 +412,7 @@ export function CartProvider({ children }) {
         Tebex.checkout.init({
           ident: fresh.ident,
           theme: 'dark',
-          locale: 'en_GB',
+          locale: 'en_US',
           colors: CHECKOUT_COLORS,
         })
         if (!checkoutListener.current) {

@@ -13,7 +13,7 @@ const PERKS = [
   { icon: 'coin', title: 'Earn more', text: 'A payout bonus on every legal job, every shift.' },
   { icon: 'car', title: 'Bigger garage', text: 'Extra slots so the collection actually fits.' },
   { icon: 'tag', title: 'Exclusive drip', text: 'Seasonal clothing and accessories nobody else gets.' },
-  { icon: 'crown', title: 'Stand out', text: 'Highlighted role and custom colour on Discord.' },
+  { icon: 'crown', title: 'Stand out', text: 'Highlighted role and custom color on Discord.' },
   { icon: 'headset', title: 'Fast support', text: 'Priority tickets answered in minutes, not days.' },
 ]
 

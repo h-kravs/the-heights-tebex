@@ -279,7 +279,7 @@ export default function CartDrawer() {
                             type={option.type === 'email' ? 'email' : option.type === 'number' ? 'number' : 'text'}
                             value={answers[option.name] || ''}
                             onChange={(e) => setAnswers({ [option.name]: e.target.value })}
-                            placeholder={option.type === 'email' ? 'you@example.co.uk' : ''}
+                            placeholder={option.type === 'email' ? 'you@example.com' : ''}
                             autoComplete={option.type === 'email' ? 'email' : 'off'}
                             className="field"
                           />

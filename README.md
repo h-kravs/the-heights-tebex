@@ -1,6 +1,6 @@
 # The Heights LA | Official Store
 
-The official webstore for the UK-run FiveM server **The Heights LA**, built on top of the
+The official webstore for the US-based FiveM server **The Heights LA**, built on top of the
 [Tebex Headless API](https://docs.tebex.io/developers/headless-api/endpoints). Packages,
 prices, images and categories all come straight from the Tebex panel, so the day to day work
 happens there and not in this code.
@@ -145,7 +145,7 @@ changing one in Netlify you have to trigger a new deploy for it to take effect.
 2. At checkout they sign in with their **FiveM (Cfx.re) account**. Tebex requires this,
    because that is how it knows which player to deliver to. The cart survives the redirect.
 3. The site syncs the cart into the Tebex basket, checks that the basket is really filled,
-   and only then opens the Tebex payment pop-up (in the brand colours, no redirect). If
+   and only then opens the Tebex payment pop-up (in the brand colors, no redirect). If
    something fails it says so instead of opening an empty checkout.
 4. After payment the buyer lands on the thank you page and the cart is emptied.
 
@@ -203,7 +203,7 @@ Worth knowing before changing things:
   and slow devices, respects reduced motion, and falls back to a CSS version without WebGL.
   No other page downloads Three.js.
 - **Brand assets** are generated from `inspo/logo.png` with `npm run brand`.
-- **Colours and fonts** are defined once as tokens at the top of `src/index.css`. The
+- **Colors and fonts** are defined once as tokens at the top of `src/index.css`. The
   display face is Archivo on its condensed width axis: `.font-display` for headings,
   `.font-label` for small labels (never thin, never mono), `.font-poster` for the hero.
   Buttons and eyebrows are skewed slabs drawn with a pseudo-element so the text stays upright.

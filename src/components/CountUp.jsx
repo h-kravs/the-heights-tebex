@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-/** Counts from 0 to `value` once visible. British thousands separators. */
+/** Counts from 0 to `value` once visible. US thousands separators. */
 export default function CountUp({ value, duration = 1400, suffix = '' }) {
   const ref = useRef(null)
   const [shown, setShown] = useState(0)
@@ -29,7 +29,7 @@ export default function CountUp({ value, duration = 1400, suffix = '' }) {
 
   return (
     <span ref={ref} className="tabular-nums">
-      {shown.toLocaleString('en-GB')}
+      {shown.toLocaleString('en-US')}
       {suffix}
     </span>
   )

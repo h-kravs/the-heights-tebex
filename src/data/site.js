@@ -69,4 +69,4 @@ export const FAQ = [
 ]
 
 /** Marquee strip under the hero. */
-export const TICKER = ['Instant delivery', 'Secure via Tebex', 'Apple Pay & PayPal', 'UK based community', 'Supports the server', 'Online 24/7']
+export const TICKER = ['Instant delivery', 'Secure via Tebex', 'Apple Pay & PayPal', 'US based community', 'Supports the server', 'Online 24/7']

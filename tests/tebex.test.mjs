@@ -60,9 +60,9 @@ test('discount uses the discount field, not base vs total (sales tax case)', () 
   assert.equal(hasDiscount({ base_price: 8, total_price: 5 }), true)
 })
 
-test('formatPrice renders British pounds', () => {
+test('formatPrice renders US dollars', () => {
   const s = formatPrice(1234.5).replace(/\s/g, '')
-  assert.ok(s.includes('£') && s.includes('1,234.50'), s)
+  assert.ok(s.includes('$') && s.includes('1,234.50'), s)
   assert.ok(formatPrice(9.99, 'EUR').includes('€'))
 })
 
@@ -107,7 +107,7 @@ test('options: only typeable ones are required from the buyer', () => {
   }
   assert.equal(isFillableOption(pkg.options[1]), false)
   assert.deepEqual(requiredOptions(pkg).map((o) => o.name), ['email'])
-  assert.deepEqual(buildVariableData(pkg, { email: ' a@b.co.uk ', note: '', other: 'x' }), { email: 'a@b.co.uk' })
+  assert.deepEqual(buildVariableData(pkg, { email: ' a@b.com ', note: '', other: 'x' }), { email: 'a@b.com' })
 })
 
 test('demo catalog is shaped like the live API', () => {
@@ -117,7 +117,7 @@ test('demo catalog is shaped like the live API', () => {
   for (const p of all) {
     assert.equal(typeof p.total_price, 'number')
     assert.ok(p.total_price <= p.base_price)
-    assert.equal(p.currency, 'GBP')
+    assert.equal(p.currency, 'USD')
   }
 })
 

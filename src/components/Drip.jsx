@@ -1,6 +1,6 @@
 /**
  * Paint dripping off an edge, as an SVG. Fills with `currentColor`, so the
- * parent sets the paint through a text colour class. Sits flush against the
+ * parent sets the paint through a text color class. Sits flush against the
  * top edge of its container; `flip` hangs it from the bottom edge of the
  * section above instead (the drips still point down).
  */

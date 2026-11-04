@@ -43,7 +43,7 @@ await square(32, 'favicon-32.png', 0.02)
 await square(180, 'apple-touch-icon.png', 0.1)
 await square(512, 'favicon-512.png', 0.1)
 
-// Open Graph cover: the logo centred on the void with a magenta glow behind it.
+// Open Graph cover: the logo centered on the void with a magenta glow behind it.
 const glow = Buffer.from(
   `<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
     <defs>

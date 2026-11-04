@@ -3,7 +3,7 @@ import { categoryIcon } from '../lib/categoryMeta'
 
 /**
  * Artwork for packages without an image. Tebex packages often ship with
- * `image: null`; a grey box would make the whole catalog look unfinished, so
+ * `image: null`; a gray box would make the whole catalog look unfinished, so
  * each one gets a branded plate: halftone mesh, a magenta light seeded by id
  * so neighbours differ, a chrome category glyph and the THL mark.
  */

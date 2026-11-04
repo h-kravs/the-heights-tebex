@@ -130,19 +130,19 @@ export async function removeCoupon(ident, code) {
 
 // ─────────────────────────── Pricing ───────────────────────────
 
-export const BASE_CURRENCY = 'GBP'
+export const BASE_CURRENCY = 'USD'
 
 export function formatPrice(amount, currency = BASE_CURRENCY) {
   const value = Number(amount) || 0
   try {
-    return new Intl.NumberFormat('en-GB', {
+    return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: currency || BASE_CURRENCY,
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     }).format(value)
   } catch {
-    return `£${value.toFixed(2)}`
+    return `$${value.toFixed(2)}`
   }
 }
 

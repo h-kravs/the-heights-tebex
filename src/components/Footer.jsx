@@ -21,7 +21,7 @@ export default function Footer() {
         <div>
           <img src="/brand/logo-sm.webp" alt="The Heights LA" width="58" height="64" className="h-16 w-auto drop-shadow-[0_0_18px_rgba(255,20,160,0.45)]" loading="lazy" />
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-mist-400">
-            UK-run FiveM roleplay, set in the heights above LA. Every purchase keeps the servers, scripts and events running.
+            US-based FiveM roleplay, set in the heights above LA. Every purchase keeps the servers, scripts and events running.
           </p>
           <div className="mt-6 flex gap-2">
             <a href={CONNECT_URL} className="btn-chrome px-5 py-3">
